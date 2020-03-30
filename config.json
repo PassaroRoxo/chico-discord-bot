@@ -1,5 +1,10 @@
 {
     "version": "1.0.0",
 	"prefix": "!",
-	"meaning_of_life": 42
+	"meaning_of_life": 42,
+	"forms": {
+		"daily": "https://forms.gle/851tYSdc4f6MzCmv5",
+		"weekly": "https://forms.gle/uzRkS8UkAAtk3vTs8",
+		"pandemic": "https://forms.gle/4CK8zpAqru9AGFDS6"
+	}
 }
