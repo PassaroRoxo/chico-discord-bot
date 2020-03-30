@@ -1,7 +1,7 @@
 module.exports = {
     name: 'commands',
     description: 'Show all Chico commands',
-    execute(menssage, args) {
+    execute(menssage) {
         menssage.channel.send(
                 '**!formulario** - Exibe todos os formulários de Atualizações \n' +
                 '**!formulario diario** - Exibe o formulário de atualização Diário \n' +

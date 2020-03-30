@@ -1,45 +1,44 @@
 const Discord = require('discord.js');
-const ChicoBot = new Discord.Client();
-
-const token = 'NjkzODI1MTAzMDE1NzA2Njg1.XoCwGg.g9Wdarr5WbpMGQ0zOEoZ-7rJAEs';
-const PREFIX = '!';
+const Chico = new Discord.Client();
+const config = require('./config.json');
+const tokens = require('./tokens.json');
 
 const fs = require('fs');
-ChicoBot.commands = new Discord.Collection();
+Chico.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for(const file of commandFiles) {
     const command = require(`./commands/${file}`);
-    ChicoBot.commands.set(command.name, command);
+    Chico.commands.set(command.name, command);
 }
 
-ChicoBot.on('ready', () => {
+Chico.on('ready', () => {
     console.log('Chico está online!');
 })
 
-ChicoBot.on('message', menssage => {
-    ChicoBot.commands.get('findChico').execute(menssage);
-    //ChicoBot.commands.get('bark').execute(menssage);
+Chico.on('message', menssage => {
+    Chico.commands.get('findChico').execute(menssage);
+    //Chico.commands.get('bark').execute(menssage);
 
-    let args = menssage.content.substring(PREFIX.length).split(" ")
+    let args = menssage.content.toLowerCase().substring(config.prefix.length).split(" ");
     
     switch(args[0]) {
         case 'comandos':
-            ChicoBot.commands.get('commands').execute(menssage);
+            Chico.commands.get('commands').execute(menssage);
         break
 
         case 'formulario':
-            ChicoBot.commands.get('forms').execute(menssage, args, Discord);          
+            Chico.commands.get('forms').execute(menssage, args, Discord);          
         break;
 
         case 'enquete':
-            ChicoBot.commands.get('poll').execute(menssage, args, Discord);
+            Chico.commands.get('poll').execute(menssage, args, Discord);
         break
 
         case 'info':
-            ChicoBot.commands.get('infos').execute(menssage, args, Discord);
+            Chico.commands.get('infos').execute(menssage, args, Discord);
         break
     }
 })
 
-ChicoBot.login(token);
+Chico.login(tokens.discord);
